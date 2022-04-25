@@ -18,6 +18,7 @@ function MyApp({ Component, pageProps }) {
     OneSignal.push(function() {
       OneSignal.init({
         appId: "69a7f78d-c60a-400b-b92d-5ddaccbc6637",
+        safari_web_id: "web.onesignal.auto.58b504fd-a471-4836-bd65-020899577e4e",
         notifyButton: {
           enable: true,
         },
