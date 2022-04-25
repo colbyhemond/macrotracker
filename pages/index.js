@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import Image from 'next/image'
+import Script from 'next/script'
 import DailyMacroTracker from '../lib/components/DailyMacroTracker'
 import UserSetUp from '../lib/components/UserSetUp'
 import WeightWidget from '../lib/components/WeightWidget'
@@ -24,18 +24,41 @@ export default function Home() {
     setWidget('items')
   }
 
+  const handleClickSettings = () => {
+    setWidget('settings')
+  }
+
   return (
     <>
-      <div className="h-[70vh] flex flex-col justify-start items-center pt-10">
+    <Head>
+      <title>Macro Tracker</title>
+      <meta
+        name="description"
+        content="Track those macros"
+      />
+      <link rel="icon" href="/favicon.ico" />
+      <Script
+        src="https://cdn.onesignal.com/sdks/OneSignalSDK.js"
+        async=""
+      ></Script>
+    </Head>
+      <div className='h-[10vh] flex justify-end mr-5 mt-5'>
+        <div onClick={handleClickSettings}>
+          <img src='/settings.svg'/>
+        </div>
+      </div>
+      <div className="h-[50vh] flex flex-col justify-start items-center pt-10">
+        { widget === 'settings' ? <UserSetUp/> : null}
         { widget === 'macro' ? <DailyMacroTracker/> : null}
         { widget === 'setup' ? <UserSetUp/> : null}
         { widget === 'weight' ? <WeightWidget/> : null}
         { widget === 'items' ? <ItemList items={[]}/>: null}
         
       </div>
-      <div className="h-[20vh] flex flex-col justify-center items-center">
+      <div className="h-[10vh] flex flex-col justify-center items-center">
         <Menu onWeight={handleClickWeight} onMacros={handleClickMacros} onItems={handleClickItems}/>
       </div>
+      <footer></footer>
     </>
   )
 }

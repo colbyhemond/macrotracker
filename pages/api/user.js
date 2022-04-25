@@ -1,7 +1,8 @@
 import clientPromise from "../../lib/mongodb.js";
 import {ObjectId} from 'mongodb'
+import { withAuth } from "@clerk/nextjs/api";
 
-export default async function handler(req, res) {
+export default withAuth(async function handler(req, res) {
   console.log('ℹ️ Request Received');
   const client = await clientPromise;
   const db = client.db(process.env.MONGODB_DB);
@@ -75,4 +76,4 @@ export default async function handler(req, res) {
       }
     break
   }
-}
+})
