@@ -30,6 +30,10 @@ export default function Home() {
 
   return (
     <>
+    <Script
+        src="https://cdn.onesignal.com/sdks/OneSignalSDK.js"
+        async=""
+      ></Script>
     <Head>
       <title>Macro Tracker</title>
       <meta
@@ -37,10 +41,7 @@ export default function Home() {
         content="Track those macros"
       />
       <link rel="icon" href="/favicon.ico" />
-      <Script
-        src="https://cdn.onesignal.com/sdks/OneSignalSDK.js"
-        async=""
-      ></Script>
+      
     </Head>
       <div className='h-[10vh] flex justify-end mr-5 mt-5'>
         <div onClick={handleClickSettings}>
