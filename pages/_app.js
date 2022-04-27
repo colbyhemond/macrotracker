@@ -2,6 +2,7 @@ import '../styles/globals.css'
 import { ClerkProvider, SignedIn, SignedOut, RedirectToSignIn } from '@clerk/nextjs';
 import { useRouter } from 'next/router';
 import { useEffect } from "react"
+import { notify } from '../lib/utils/notifications'
 
 
 const publicPages = [];
@@ -25,6 +26,8 @@ function MyApp({ Component, pageProps }) {
         allowLocalhostAsSecureOrigin: true,
       });
     });
+
+    // notify()
 
     return () => {
         window.OneSignal = undefined;

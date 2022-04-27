@@ -6,6 +6,8 @@ import WeightWidget from '../lib/components/WeightWidget'
 import ItemList from '../lib/components/ItemList'
 import Menu from '../lib/components/Menu'
 import { useState } from 'react'
+import MenuPosition from '../lib/components/MenuPosition'
+import MainContentPosition from '../lib/components/MainContentPosition'
 
 
 
@@ -48,18 +50,16 @@ export default function Home() {
           <img src='/settings.svg'/>
         </div>
       </div>
-      <div className="h-[50vh] flex flex-col justify-start items-center pt-10">
+      <MainContentPosition>
         { widget === 'settings' ? <UserSetUp/> : null}
         { widget === 'macro' ? <DailyMacroTracker/> : null}
         { widget === 'setup' ? <UserSetUp/> : null}
         { widget === 'weight' ? <WeightWidget/> : null}
         { widget === 'items' ? <ItemList items={[]}/>: null}
-        
-      </div>
-      <div className="h-[10vh] flex flex-col justify-center items-center">
+      </MainContentPosition>
+      <MenuPosition>
         <Menu onWeight={handleClickWeight} onMacros={handleClickMacros} onItems={handleClickItems}/>
-      </div>
-      <footer></footer>
+      </MenuPosition>
     </>
   )
 }
