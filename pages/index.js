@@ -12,7 +12,7 @@ import MainContentPosition from '../lib/components/MainContentPosition'
 
 
 export default function Home() {
-  const [widget, setWidget] = useState('macro')
+  const [widget, setWidget] = useState('weight')
 
   const handleClickMacros = () => {
     setWidget('macro')
