@@ -8,11 +8,14 @@ import Menu from '../lib/components/Menu'
 import { useState } from 'react'
 import MenuPosition from '../lib/components/MenuPosition'
 import MainContentPosition from '../lib/components/MainContentPosition'
+import { Settings } from 'react-feather'
 
 
 
 export default function Home() {
   const [widget, setWidget] = useState('macro')
+  const [date, setDate] = useState(new Date())
+
 
   const handleClickMacros = () => {
     setWidget('macro')
@@ -28,6 +31,10 @@ export default function Home() {
 
   const handleClickSettings = () => {
     setWidget('settings')
+  }
+
+  const handleDateChange = (d) => {
+    setDate(d)
   }
 
   return (
@@ -47,12 +54,12 @@ export default function Home() {
     </Head>
       <div className='h-[10vh] flex justify-end mr-5 mt-5'>
         <div onClick={handleClickSettings}>
-          <img src='/settings.svg'/>
+          <Settings/>
         </div>
       </div>
       <MainContentPosition>
         { widget === 'settings' ? <UserSetUp/> : null}
-        { widget === 'macro' ? <DailyMacroTracker/> : null}
+        { widget === 'macro' ? <DailyMacroTracker date={date} onDateChange={handleDateChange}/> : null}
         { widget === 'setup' ? <UserSetUp/> : null}
         { widget === 'weight' ? <WeightWidget/> : null}
         { widget === 'items' ? <ItemList items={[]}/>: null}
