@@ -8,7 +8,8 @@ import Menu from '../lib/components/Menu'
 import { useState } from 'react'
 import MenuPosition from '../lib/components/MenuPosition'
 import MainContentPosition from '../lib/components/MainContentPosition'
-import { Settings } from 'react-feather'
+import { Settings, BookOpen } from 'react-feather'
+import FoodCheatSheet from '../lib/components/FoodCheatSheet'
 
 
 
@@ -37,6 +38,10 @@ export default function Home() {
     setDate(d)
   }
 
+  const handleClickCheatSheet = () => {
+    setWidget('cheatsheet')
+  }
+
   return (
     <>
     <Script
@@ -52,7 +57,10 @@ export default function Home() {
       <link rel="icon" href="/favicon.ico" />
       
     </Head>
-      <div className='h-[10vh] flex justify-end mr-5 mt-5'>
+      <div className='h-[10vh] flex justify-between mx-5 mt-5'>
+      <div onClick={handleClickCheatSheet}>
+          <BookOpen/>
+        </div>
         <div onClick={handleClickSettings}>
           <Settings/>
         </div>
@@ -63,6 +71,7 @@ export default function Home() {
         { widget === 'setup' ? <UserSetUp/> : null}
         { widget === 'weight' ? <WeightWidget/> : null}
         { widget === 'items' ? <ItemList items={[]}/>: null}
+        { widget === 'cheatsheet' ? <FoodCheatSheet/> : null}
       </MainContentPosition>
       <MenuPosition>
         <Menu onWeight={handleClickWeight} onMacros={handleClickMacros} onItems={handleClickItems}/>
