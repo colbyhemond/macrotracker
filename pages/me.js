@@ -81,7 +81,7 @@ export default function Home() {
       </div>
       <MainContentPosition>
         { widget === 'settings' ? <UserSetUp/> : null}
-        { widget === 'macro' ? <DailyMacroTracker date={date} onDateChange={handleDateChange}/> : null}
+        { widget === 'macro' ? <DailyMacroTracker date={date} onDateChange={handleDateChange} onUserSetupRequired={handleClickSettings}/> : null}
         { widget === 'setup' ? <UserSetUp/> : null}
         { widget === 'weight' ? <WeightWidget/> : null}
         { widget === 'items' ? <ItemList items={[]}/>: null}
