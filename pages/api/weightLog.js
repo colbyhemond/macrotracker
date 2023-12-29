@@ -1,11 +1,11 @@
 import clientPromise from "../../lib/mongodb.js";
 import {ObjectId} from 'mongodb'
-import { getAuth } from "@clerk/nextjs/server";
+// import { getAuth } from "@clerk/nextjs/server";
 
 
 
 export default async function handler(req, res) {
-  const { userId, sessionId, getToken } = getAuth(req);
+  // const { userId, sessionId, getToken } = getAuth(req);
 
   console.log('ℹ️ Request Received');
   const client = await clientPromise;
@@ -33,7 +33,7 @@ export default async function handler(req, res) {
             console.log('GET Request Received');
 
             const weightLog = await db.collection("weightLogs").find({
-              user: userId
+              // user: userId
             }).toArray()
             // console.log(weightLog);
             res.status(201).json(weightLog)
