@@ -3,6 +3,8 @@ import {ObjectId} from 'mongodb'
 import { withAuth } from "@clerk/nextjs/api";
 
 export default withAuth(async function handler(req, res) {
+  const { userId, sessionId, getToken } = req.auth;
+
   console.log('ℹ️ Request Received');
   const client = await clientPromise;
   const db = client.db(process.env.MONGODB_DB);
@@ -40,9 +42,42 @@ export default withAuth(async function handler(req, res) {
       break
     case "PUT":
         try {
-
+            
             console.log('PUT Request Received');
-            res.status(201).json('')
+
+            let bodyObject = req.body ? JSON.parse(req.body) : null;
+            let update
+
+            console.log(bodyObject.weight)
+
+            if (req.query.weight === 'true') {
+              update = { $set: {
+                  weight: bodyObject.weight
+                }
+              }
+            } else {
+              update = { $set: {
+                user: userId,
+                name: bodyObject.name,
+                gender: bodyObject.gender,
+                age: bodyObject.age,
+                weight: bodyObject.weight,
+                feet: bodyObject.feet,
+                inches: bodyObject.inches,
+                height: bodyObject.height,
+                bmr: bodyObject.bmr,
+                activity: bodyObject.activity
+              }};
+            }
+
+            const query = { user: userId };
+            
+            const options = { upsert: true };
+
+            const user = await db.collection("users").updateOne(query, update, options)
+            console.log(user);
+            
+            res.status(201).json(user)
             return
 
         } catch (error) {

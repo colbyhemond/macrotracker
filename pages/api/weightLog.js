@@ -34,7 +34,7 @@ export default withAuth(async function handler(req, res) {
             const weightLog = await db.collection("weightLogs").find({
               user: userId
             }).toArray()
-            console.log(weightLog);
+            // console.log(weightLog);
             res.status(201).json(weightLog)
             return
 

@@ -5,7 +5,9 @@ import { useEffect } from "react"
 import { notify } from '../lib/utils/notifications'
 
 
-const publicPages = [];
+const publicPages = [
+  '/'
+];
 
 function MyApp({ Component, pageProps }) {
 
