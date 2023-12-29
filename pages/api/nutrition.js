@@ -1,32 +1,35 @@
 import clientPromise from "../../lib/mongodb.js";
 import {ObjectId} from 'mongodb'
-import { withAuth } from "@clerk/nextjs/api";
+import Fatsecret from 'fatsecret'
 
-
-export default withAuth(async function handler(req, res) {
-  const { userId, sessionId, getToken } = req.auth;
-
+export default async function handler(req, res) {
   console.log('ℹ️ Request Received');
   const client = await clientPromise;
   const db = client.db(process.env.MONGODB_DB);
+
+  const fatAPI = new Fatsecret('64c68c9484b249d2ad8bce67ae0b3580', 'ad2192cbda4044d094332d9a61b53b4b')
   
 
 
   switch (req.method) {
     case "POST":
         try {
-            let bodyObject = req.body ? JSON.parse(req.body) : null;
-            console.log('POST');
-
-            const query = { date: bodyObject.date };
-            const update = { $set: { user: bodyObject.user, date: bodyObject.date, items: bodyObject.items }};
-            const options = { upsert: true };
-
-            const item = await db.collection("foodLogs").updateOne(query, update, options)
-            console.log(item);
+            // let bodyObject = req.body ? JSON.parse(req.body) : null;
+            console.log('POST Request Received');
             
-            res.status(201).json(item)
-            return
+            
+            fatAPI.method('foods.search', {
+                search_expression: 'Coffiest',
+                max_results: 10
+            })
+            .then(response=> {
+                console.log(response);
+                res.status(200).json(response)
+                return
+            })
+
+
+            
 
         } catch (error) {
           console.log(error);
@@ -36,16 +39,10 @@ export default withAuth(async function handler(req, res) {
     case "GET":
         try {
             console.log('GET Request Received');
-            console.log(req.query.date)
 
-            const foodLog = await db.collection("foodLogs").find({
-              date: {
-                $eq: req.query.date
-              },
-              user: userId
-            }).toArray()
-            console.log(foodLog);
-            res.status(201).json(foodLog)
+            const items = await db.collection("items").find({}).toArray()
+            console.log(items);
+            res.status(201).json(items)
             return
 
         } catch (error) {
@@ -73,10 +70,10 @@ export default withAuth(async function handler(req, res) {
             console.log();
             const body = JSON.parse(req.body)
 
-            const item = await db.collection("foodLogs").deleteOne({ _id: ObjectId(body._id)})
-            console.log(item);
+            const response = await db.collection("items").deleteOne({ _id: ObjectId(body._id)})
+            console.log(response);
 
-            if (item.deletedCount === 1) {
+            if (response.deletedCount === 1) {
                 res.status(204).json('')
                 return
             } else {
@@ -91,4 +88,4 @@ export default withAuth(async function handler(req, res) {
       }
     break
   }
-})
+}

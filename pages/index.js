@@ -10,6 +10,7 @@ import MenuPosition from '../lib/components/MenuPosition'
 import MainContentPosition from '../lib/components/MainContentPosition'
 import { Settings, BookOpen } from 'react-feather'
 import FoodCheatSheet from '../lib/components/FoodCheatSheet'
+import FoodLookup from '../lib/components/FoodLookup'
 
 
 
@@ -42,6 +43,10 @@ export default function Home() {
     setWidget('cheatsheet')
   }
 
+  const handleClickFoodLookup = () => {
+    setWidget('lookup')
+  }
+
   return (
     <>
     <Script
@@ -58,9 +63,12 @@ export default function Home() {
       
     </Head>
       <div className='h-[10vh] flex justify-between mx-5 mt-5'>
-      <div onClick={handleClickCheatSheet}>
+        <div onClick={handleClickCheatSheet}>
           <BookOpen/>
         </div>
+        {/* <div onClick={handleClickFoodLookup}>
+          <div>🔎</div>
+        </div> */}
         <div onClick={handleClickSettings}>
           <Settings/>
         </div>
@@ -72,6 +80,7 @@ export default function Home() {
         { widget === 'weight' ? <WeightWidget/> : null}
         { widget === 'items' ? <ItemList items={[]}/>: null}
         { widget === 'cheatsheet' ? <FoodCheatSheet/> : null}
+        { widget === 'lookup' ? <FoodLookup/> : null}
       </MainContentPosition>
       <MenuPosition>
         <Menu onWeight={handleClickWeight} onMacros={handleClickMacros} onItems={handleClickItems}/>
