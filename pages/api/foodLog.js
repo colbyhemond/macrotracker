@@ -4,7 +4,7 @@ import { getAuth } from "@clerk/nextjs/server";
 
 
 export default async function handler(req, res) {
-  const { userId, sessionId, getToken } = getAuth(req)
+  const { userId } = getAuth(req)
 
   console.log('ℹ️ Request Received');
   const client = await clientPromise;
