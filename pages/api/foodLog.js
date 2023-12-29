@@ -42,7 +42,7 @@ export default async function handler(req, res) {
               date: {
                 $eq: req.query.date
               },
-              // user: userId
+              user: req.query.user
             }).toArray()
             console.log(foodLog);
             res.status(201).json(foodLog)

@@ -31,7 +31,9 @@ export default async function handler(req, res) {
         try {
             console.log('GET Request Received');
 
-            const users = await db.collection("users").find({}).toArray()
+            const users = await db.collection("users").find({
+              user: req.query.user
+            }).toArray()
             console.log(users);
             res.status(201).json(users)
             return

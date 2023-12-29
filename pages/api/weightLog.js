@@ -33,7 +33,7 @@ export default async function handler(req, res) {
             console.log('GET Request Received');
 
             const weightLog = await db.collection("weightLogs").find({
-              // user: userId
+              user: req.query.user
             }).toArray()
             // console.log(weightLog);
             res.status(201).json(weightLog)
