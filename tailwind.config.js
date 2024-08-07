@@ -1,3 +1,4 @@
+
 module.exports = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
@@ -10,4 +11,7 @@ module.exports = {
     require("daisyui"),
     require('@tailwindcss/typography'),
   ],
+  daisyui: {
+    themes: ["dark"]
+  }
 }

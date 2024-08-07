@@ -10,7 +10,7 @@ export default function About () {
           <div className='text-3xl font-extrabold tracking-tight'>Macro Tracker</div>
       </div>
       <div className='bg-base-300 bg-gradient-to-br from-indigo-950'>
-        <div className='flex justify-center gap-48 py-28'>
+        <div className='flex flex-wrap justify-center gap-10 md:gap-48 py-28'>
           <div className='text-right'>
             <div className='text-6xl font-extrabold tracking-tight'>Simply</div>
             <div className='text-6xl font-extrabold tracking-tight'>Track</div>
@@ -20,7 +20,7 @@ export default function About () {
             <button className='btn btn-lg btn-primary' onClick={()=> router.push('/app')}>Start Tracking</button>
           </div>
         </div>
-        <div className='py-10 mt-10 m-auto prose'>
+        <div className='py-10 px-5 mt-10 m-auto prose'>
           <h1 className='text-3xl'>A minimalistic approach to tracking macronutrients.</h1>
           <p>We should not be tied to our phones when we should be focusing on ourselves. We have eliminated the all encompassing health app features and included only the necessary elements.</p>
           <p>Using the widely used standard calculation for how many calories you burn a day at baseline, the Mifflin St. Jeor equation</p>
